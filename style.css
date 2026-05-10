@@ -7,16 +7,16 @@
 
 body {
     font-family: 'Quicksand', sans-serif;
-    /* Màu nền gradient hoàng hôn ấm áp, lãng mạn và nghệ thuật */
     background: linear-gradient(135deg, #fefae0, #fcd5ce, #ffb5a7);
     height: 100vh;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    perspective: 1000px; /* Tạo chiều sâu cho hiệu ứng 3D */
 }
 
-/* Màn hình chờ - Bìa sách nghệ thuật */
+/* Màn hình chờ */
 #welcome-screen {
     position: fixed;
     top: 0;
@@ -27,13 +27,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 100; /* Đảm bảo luôn nằm trên cùng */
     transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 #welcome-screen.hidden {
     opacity: 0;
-    transform: scale(1.05);
+    transform: scale(1.1) rotateX(10deg);
     pointer-events: none;
 }
 
@@ -44,10 +44,10 @@ body {
 }
 
 .flower-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #e5989b;
     margin-bottom: 20px;
-    animation: rotateFlower 10s linear infinite;
+    animation: rotateFlower 15s linear infinite;
 }
 
 @keyframes rotateFlower {
@@ -57,39 +57,39 @@ body {
 .aesthetic-title {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: #6d597a;
-    line-height: 1.5;
+    line-height: 1.4;
     font-weight: 500;
 }
 
 .aesthetic-subtitle {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #b5838d;
     margin-top: 15px;
     letter-spacing: 1px;
 }
 
 #start-btn {
-    margin-top: 30px;
-    padding: 10px 35px;
-    font-size: 1rem;
-    color: #6d597a;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(109, 89, 122, 0.3);
+    margin-top: 35px;
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    color: #fff;
+    background: #6d597a;
+    border: none;
     border-radius: 30px;
     cursor: pointer;
-    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 15px rgba(109, 89, 122, 0.3);
     transition: all 0.3s ease;
 }
 
 #start-btn:hover {
-    background: #6d597a;
-    color: #fff;
-    box-shadow: 0 5px 15px rgba(109, 89, 122, 0.2);
+    background: #e5989b;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(229, 152, 155, 0.4);
 }
 
-/* Màn hình chính - Khung tranh Glassmorphism lơ lửng */
+/* Màn hình chính */
 #main-screen {
     text-align: center;
     opacity: 0;
@@ -99,6 +99,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 #main-screen.show {
@@ -106,38 +107,60 @@ body {
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 40px 30px;
-    border-radius: 24px;
-    max-width: 500px;
-    box-shadow: 0 8px 32px 0 rgba(109, 89, 122, 0.1);
-    z-index: 5;
-    transform: translateY(0);
-    animation: floatCard 4s ease-in-out infinite;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 50px 40px;
+    border-radius: 30px;
+    max-width: 600px;
+    box-shadow: 0 10px 40px rgba(109, 89, 122, 0.15);
+    z-index: 10;
+    animation: floatCard 6s ease-in-out infinite;
 }
 
 @keyframes floatCard {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-15px); }
 }
 
 .main-love-title {
     font-family: 'Playfair Display', serif;
     color: #6d597a;
-    font-size: 2rem;
-    margin-bottom: 15px;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+#crush-name {
+    color: #e5989b;
+    font-style: italic;
+    position: relative;
+}
+
+#crush-name::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #e5989b;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+
+#main-screen.show #crush-name::after {
+    transform: scaleX(1);
 }
 
 .love-quote {
     font-style: italic;
     color: #b5838d;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
-/* Hoạt ảnh các bức vẽ lãng mạn bay lên */
+/* Container cho các hành tinh khổng lồ */
 #animation-container {
     position: absolute;
     width: 100%;
@@ -145,29 +168,58 @@ body {
     top: 0;
     left: 0;
     pointer-events: none;
+    overflow: hidden;
 }
 
-.art-floating-item {
+/* Định nghĩa "Hành tinh" khổng lồ */
+.giant-planet {
     position: absolute;
-    bottom: -100px;
-    font-size: 2.2rem;
-    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.05));
-    animation: floatUpArt var(--duration) ease-in-out forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    opacity: 0;
+    animation: appear 1s ease-out forwards, floatPlanet var(--duration) ease-in-out infinite;
 }
 
-@keyframes floatUpArt {
-    0% {
-        transform: translateY(0) translateX(0) scale(0.5) rotate(0deg);
-        opacity: 0;
+@keyframes appear {
+    to { opacity: 1; }
+}
+
+/* Hiệu ứng trôi nổi và xoay chậm */
+@keyframes floatPlanet {
+    0%, 100% {
+        transform: translate(0, 0) rotateX(var(--rotX)) rotateY(var(--rotY));
     }
-    15% {
-        opacity: 0.8;
+    50% {
+        transform: translate(var(--driftX), var(--driftY)) rotateX(calc(var(--rotX) + 10deg)) rotateY(calc(var(--rotY) + 10deg));
     }
-    85% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(-115vh) translateX(var(--drift)) scale(1.1) rotate(var(--rotation));
-        opacity: 0;
-    }
+}
+
+/* Nội dung bên trong hành tinh (Emoji) */
+.planet-content {
+    font-size: var(--size);
+    user-select: none;
+    animation: rotateContent 20s linear infinite;
+}
+
+@keyframes rotateContent {
+    100% { transform: rotateY(360deg); }
+}
+
+/* Hiệu ứng lấp lánh xung quanh */
+.sparkle {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+    animation: sparkle var(--duration) linear infinite;
+}
+
+@keyframes sparkle {
+    0% { transform: scale(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
 }

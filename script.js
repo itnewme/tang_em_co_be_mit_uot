@@ -37,7 +37,7 @@ document.getElementById('start-btn').addEventListener('click', function() {
         }
 
         const randomX = Math.random() * 90; // Vị trí ngẫu nhiên chiều ngang
-        item.style.left = `${randomX}%`;
+        item.style.left = ${randomX}%;
 
         // Tạo sự tự nhiên, bồng bềnh bằng các thông số ngẫu nhiên
         const duration = Math.random() * 4 + 5; // Bay chậm hơn (từ 5s đến 9s) để tạo cảm giác bình yên

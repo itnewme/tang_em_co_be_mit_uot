@@ -12,7 +12,7 @@ document.getElementById('start-btn').addEventListener('click', function() {
         '⬜', // Đậu hũ mềm mại
         '🌸', // Những cánh hoa anh đào bay lướt
         '✨', // Những đốm sáng lấp lánh như cổ tích
-        crushName // Nguyễn Thế Phú
+        crushName // Nguyễn Ngọc Mai
     ];
 
     const container = document.getElementById('animation-container');

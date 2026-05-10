@@ -1,0 +1,173 @@
+/* Reset & Fonts */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    /* Màu nền gradient hoàng hôn ấm áp, lãng mạn và nghệ thuật */
+    background: linear-gradient(135deg, #fefae0, #fcd5ce, #ffb5a7);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Màn hình chờ - Bìa sách nghệ thuật */
+#welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #fff9f5 0%, #fcd5ce 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#welcome-screen.hidden {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+}
+
+.art-cover {
+    text-align: center;
+    padding: 40px;
+    max-width: 400px;
+}
+
+.flower-icon {
+    font-size: 2rem;
+    color: #e5989b;
+    margin-bottom: 20px;
+    animation: rotateFlower 10s linear infinite;
+}
+
+@keyframes rotateFlower {
+    100% { transform: rotate(360deg); }
+}
+
+.aesthetic-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: #6d597a;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.aesthetic-subtitle {
+    font-size: 0.9rem;
+    color: #b5838d;
+    margin-top: 15px;
+    letter-spacing: 1px;
+}
+
+#start-btn {
+    margin-top: 30px;
+    padding: 10px 35px;
+    font-size: 1rem;
+    color: #6d597a;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(109, 89, 122, 0.3);
+    border-radius: 30px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+#start-btn:hover {
+    background: #6d597a;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(109, 89, 122, 0.2);
+}
+
+/* Màn hình chính - Khung tranh Glassmorphism lơ lửng */
+#main-screen {
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-screen.show {
+    opacity: 1;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 40px 30px;
+    border-radius: 24px;
+    max-width: 500px;
+    box-shadow: 0 8px 32px 0 rgba(109, 89, 122, 0.1);
+    z-index: 5;
+    transform: translateY(0);
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.main-love-title {
+    font-family: 'Playfair Display', serif;
+    color: #6d597a;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.love-quote {
+    font-style: italic;
+    color: #b5838d;
+    font-size: 1rem;
+}
+
+/* Hoạt ảnh các bức vẽ lãng mạn bay lên */
+#animation-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.art-floating-item {
+    position: absolute;
+    bottom: -100px;
+    font-size: 2.2rem;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.05));
+    animation: floatUpArt var(--duration) ease-in-out forwards;
+}
+
+@keyframes floatUpArt {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.8;
+    }
+    85% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-115vh) translateX(var(--drift)) scale(1.1) rotate(var(--rotation));
+        opacity: 0;
+    }
+}

@@ -1,18 +1,33 @@
-document.getElementById('start-btn').addEventListener('click', function() {
-    document.getElementById('welcome-screen').classList.add('hidden');
-    document.getElementById('main-screen').classList.add('show');
+document.addEventListener('DOMContentLoaded', function() {
+    const startBtn = document.getElementById('start-btn');
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const mainScreen = document.getElementById('main-screen');
 
+    if (startBtn) {
+        startBtn.addEventListener('click', function() {
+            // Thêm class hidden để ẩn màn hình chào
+            welcomeScreen.classList.add('hidden');
+            // Thêm class show để hiện màn hình chính
+            mainScreen.classList.add('show');
+
+            // Bắt đầu tạo hiệu ứng bay
+            startFloatingEffects();
+        });
+    }
+});
+
+function startFloatingEffects() {
     const crushName = document.getElementById('crush-name').innerText;
 
-    // Danh sách "bức tranh" nhỏ bay lên: máy xúc gỗ, cà chua mọng, trứng lòng đào, đậu hũ mềm
+    // Danh sách "bức tranh" nhỏ bay lên
     const items = [
         '🚜', // Máy xúc
-        '🍅', // Cà chua ấm áp
-        '🍳', // Quả trứng ốp la mềm mịn
-        '⬜', // Đậu hũ mềm mại
-        '🌸', // Những cánh hoa anh đào bay lướt
-        '✨', // Những đốm sáng lấp lánh như cổ tích
-        crushName // Nguyễn Ngọc Mai
+        '🍅', // Cà chua
+        '🍳', // Quả trứng ốp la
+        '⬜', // Đậu hũ
+        '🌸', // Cánh hoa
+        '✨', // Đốm sáng
+        crushName // Tên người ấy
     ];
 
     const container = document.getElementById('animation-container');
@@ -24,37 +39,37 @@ document.getElementById('start-btn').addEventListener('click', function() {
         const randomContent = items[Math.floor(Math.random() * items.length)];
         item.innerText = randomContent;
 
-        // Nếu là tên, định dạng theo phong cách chữ viết tay mềm mại
+        // Định dạng riêng nếu là tên người ấy
         if (randomContent === crushName) {
             item.style.fontFamily = "'Playfair Display', serif";
             item.style.fontSize = '1.1rem';
             item.style.fontWeight = '500';
             item.style.color = '#e5989b';
-            item.style.background = 'rgba(255, 255, 255, 0.7)';
+            item.style.background = 'rgba(255, 255, 255, 0.8)';
             item.style.padding = '6px 12px';
             item.style.borderRadius = '20px';
             item.style.border = '1px solid rgba(229, 152, 155, 0.3)';
         }
 
-        const randomX = Math.random() * 90; // Vị trí ngẫu nhiên chiều ngang
-        item.style.left = ${randomX}%;
+        const randomX = Math.random() * 90;
+        item.style.left = randomX + '%';
 
-        // Tạo sự tự nhiên, bồng bềnh bằng các thông số ngẫu nhiên
-        const duration = Math.random() * 4 + 5; // Bay chậm hơn (từ 5s đến 9s) để tạo cảm giác bình yên
-        const drift = (Math.random() - 0.5) * 120; // Độ lắc lư nhẹ nhàng
-        const rotation = (Math.random() - 0.5) * 90; // Chỉ xoay nhẹ thay vì xoay vòng vèo
+        const duration = Math.random() * 4 + 5; 
+        const drift = (Math.random() - 0.5) * 120; 
+        const rotation = (Math.random() - 0.5) * 90; 
 
-        item.style.setProperty('--duration', `${duration}s`);
-        item.style.setProperty('--drift', `${drift}px`);
-        item.style.setProperty('--rotation', `${rotation}deg`);
+        // Sử dụng chuỗi nối chuẩn để tránh lỗi dấu huyền/dấu nháy trên một số trình duyệt
+        item.style.setProperty('--duration', duration + 's');
+        item.style.setProperty('--drift', drift + 'px');
+        item.style.setProperty('--rotation', rotation + 'deg');
 
         container.appendChild(item);
 
-        setTimeout(() => {
+        setTimeout(function() {
             item.remove();
         }, duration * 1000);
     }
 
-    // Tạo các hạt cảm xúc lơ lửng đều đặn mỗi 400ms
+    // Tạo các hạt lơ lửng đều đặn mỗi 400ms
     setInterval(createArtItem, 400);
-});
+}
